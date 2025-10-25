@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update]
+
   def index
     @books = Book.all
     @users = User.all
@@ -28,7 +30,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :introduction, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :introduction, :profile_image)
   end
 
   def ensure_correct_user
