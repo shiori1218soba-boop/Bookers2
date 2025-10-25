@@ -1,2 +1,45 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<%= render 'layouts/flash'%>
+
+<% if @new_book.errors.any? %>
+  <h3><%= @new_book.errors.count %> errors prohibited this obj from being saved:</h3>
+  <ul>
+    <% @new_book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class='container px-5 px-sm-0'>
+	<div class='row'>
+	  <%= render 'layouts/info', user: @user, book: @new_book, user: current_user %>
+
+    <div class="col-md-8 offset-md-1">
+    <h2>Book detail</h2>
+    <table class="table table-hover table-inverse">
+      <tbody>
+          <tr>
+            <td>
+              <% if @book.user.profile_image.attached? %>
+                <%= image_tag @book.user.profile_image, size: "50x50" %>
+              <% else %>
+                <%= image_tag 'default-image.jpg', size: "50x50" %>
+              <br>
+              <%= link_to @user.name, user_path(@user) %>
+            </td>
+            <td><%= link_to @book.title, book_path(@book) %></td>
+            <td><%= @book.body %></td>
+            <td>
+              <% if @book.user == current_user %>
+                <%= link_to "Edit", edit_book_path(@book), class: "btn btn-success" %>
+              <% end %>
+            </td>
+            <td>
+              <% if @book.user == current_user %>
+                <%= link_to "Destroy", book_path(@book), method: :delete, data: { confirm: "本当に消しますか？" }, class: "btn btn-danger" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
