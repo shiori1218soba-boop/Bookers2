@@ -11,7 +11,7 @@
 
 <div class='container px-5 px-sm-0'>
 	<div class='row'>
-	  <%= render 'layouts/info', user: @user, book: @new_book, user: current_user %>
+	  <%= render 'layouts/info', user: @user, book: @new_book, displayed_user: @user %>
 	  <div class='col-md-8 offset-md-1'>
 	    <h2>Books</h2>
 	    <table class='table table-hover table-inverse'>
@@ -28,9 +28,13 @@
             <tr>
               <td>
                 <% if book.user.profile_image.attached? %>
-                  <%= image_tag book.user.profile_image, size: "50x50" %>
+                  <%= link_to book_path(book) do %>
+                    <%= image_tag book.user.profile_image, size: "50x50" %>
+                  <% end %>
                 <% else %>
-                  <%= image_tag 'default-image.jpg', size: "50x50" %>
+                  <%= link_to book_path(book) do %>
+                    <%= image_tag 'default-image.jpg', size: "50x50" %>
+                  <% end %>
                 <% end %>
               </td>
               <td><%= link_to book.title, book_path(book) %></td>

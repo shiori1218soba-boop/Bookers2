@@ -11,7 +11,7 @@
 
 <div class='container px-5 px-sm-0'>
 	<div class='row'>
-	  <%= render 'layouts/info', user: @user, book: @new_book, user: current_user %>
+	  <%= render 'layouts/info', user: @user, book: @new_book, displayed_user: @book.user, displayed_user: @user %>
 
     <div class="col-md-8 offset-md-1">
     <h2>Book detail</h2>
@@ -20,11 +20,12 @@
           <tr>
             <td>
               <% if @book.user.profile_image.attached? %>
-                <%= image_tag @book.user.profile_image, size: "50x50" %>
+                <%= link_to image_tag(@book.user.profile_image, size: "50x50"), book_path(@book) %>
               <% else %>
-                <%= image_tag 'default-image.jpg', size: "50x50" %>
+                <%= link_to image_tag('default-image.jpg', size: "50x50"), book_path(@book) %>
+              <% end %>
               <br>
-              <%= link_to @user.name, user_path(@user) %>
+              <%= link_to @book.user.name, user_path(@book.user) %>
             </td>
             <td><%= link_to @book.title, book_path(@book) %></td>
             <td><%= @book.body %></td>
@@ -39,7 +40,6 @@
               <% end %>
             </td>
           </tr>
-        <% end %>
       </tbody>
     </table>
   </div>

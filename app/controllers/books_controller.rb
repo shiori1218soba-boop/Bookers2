@@ -52,4 +52,11 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title, :body)
   end
 
+  def is_matching_login_user
+    book = Book.find(params[:id])
+    unless book.user_id == current_user.id
+      redirect_to books_path
+    end
+  end
+
 end
