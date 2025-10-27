@@ -11,7 +11,8 @@
 
 <div class='container px-5 px-sm-0'>
 	<div class='row'>
-	  <%= render 'layouts/info', user: @user, book: @new_book, displayed_user: @book.user, displayed_user: @user %>
+	  <%= render 'layouts/info', displayed_user: @displayed_user, new_book: @new_book %>
+
 
     <div class="col-md-8 offset-md-1">
     <h2>Book detail</h2>
