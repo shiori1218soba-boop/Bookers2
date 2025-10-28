@@ -28,11 +28,11 @@
             <tr>
               <td>
                 <% if book.user.profile_image.attached? %>
-                  <%= link_to book_path(book) do %>
+                  <%= link_to user_path(book.user) do %>
                     <%= image_tag book.user.profile_image, size: "50x50" %>
                   <% end %>
                 <% else %>
-                  <%= link_to book_path(book) do %>
+                  <%= link_to user_path(book.user) do %>
                     <%= image_tag 'default-image.jpg', size: "50x50" %>
                   <% end %>
                 <% end %>
